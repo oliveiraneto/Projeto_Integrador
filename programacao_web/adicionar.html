@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Alimento</title>
+    <!-- Link para o CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-eBwvrAawoGMYe0C8QIofPvFzLIOgBo1xM3qW3YcwA3lZNY2tPbMQ9P+oKcRvkgiZRfOzJx/TN3W1YrYffOMZzw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Adicionar Alimento</h1>
+        </header>
+        <form id="formulario">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome do Alimento</label>
+                <input type="text" class="form-control" id="nome" required>
+            </div>
+            <div class="mb-3">
+                <label for="data" class="form-label">Data de Validade</label>
+                <input type="date" class="form-control" id="data" required>
+            </div>
+            <div class="mb-3">
+                <label for="quantidade" class="form-label">Quantidade</label>
+                <input type="number" class="form-control" id="quantidade" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email para Notificação</label>
+                <input type="email" class="form-control" id="email">
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+        </form>
+    </div>
+    
+    <!-- Link para o JavaScript do Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-zOyN/lwceM2hffaaN25Ld48NbvzU87pX9D1zU/PT+71euBHn5w5mn5G5mTDpPR1ulnBu4e4l8z3W64x+5BQ7vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script>
+        const formulario = document.getElementById('formulario');
+    
+        formulario.addEventListener('submit', (evento) => {
+            evento.preventDefault();
+    
+            const nome = document.getElementById('nome').value;
+            const data = document.getElementById('data').value;
+            const quantidade = document.getElementById('quantidade').value;
+            const email = document.getElementById('email').value;
+    
+            const novoAlimento = {
+                nome: nome,
+                data: data,
+                quantidade: quantidade,
+                email: email
+            }
+    
+            let alimentos = JSON.parse(localStorage.getItem('alimentos'));
+    
+            if (!alimentos) {
+                alimentos = [];
+            }
+    
+            alimentos.push(novoAlimento);
+    
+            localStorage.setItem('alimentos', JSON.stringify(alimentos));
+    
+            alert('Alimento adicionado com sucesso!');
+    
+            formulario.reset();
+        });
+    </script>
+</body>
+</html>    
